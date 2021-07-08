@@ -8,7 +8,7 @@ The repo is structured as follows:
 * `pando/` contains scripts and functions used to infer the gene regulatory network
 	- `atac.R` contains functions to manipulate and plot ATAC-seq data
 	- `pseudocells.R` contains the functions to construct pseudocells as used in [Kanton et al. 2019](https://www.nature.com/articles/s41586-019-1654-9)
-	- `fit_multiome_glm.R` contains a script to do model fitting for GRN inference. This is now also implemented in the R package [Pando](www.github.com/quadbiolab/Pando)
+	- `fit_multiome_glm.R` contains a script to do model fitting for GRN inference. This is now also implemented in the R package [Pando](github.com/quadbiolab/Pando)
 	- `models.R` contains helper functions for model fitting.
 * `crop_seq/` contains scripts and functions used for the analysis of the CROP-seq data
 	- `get_guide_umis.py` is a script to extract guide UMIs with high read support given a cellranger output (`molecule_info.h5`) using a GMM-based approach
