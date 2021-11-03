@@ -65,7 +65,9 @@ get_perturbation_effects.Seurat <- function(
 	genes_use = NULL,
 	family = 'gaussian',
 	adjust_method = 'holm',
-	bin_thresh = NULL
+	bin_thresh = NULL,
+	verbose = T,
+	parallel = T
 ){
 	guide_pattern <- paste0('(.+)', guide_sep, '(\\d+)')
 	ko_prob <- GetAssayData(object, assay = perturb_assay, slot = 'data')
@@ -95,7 +97,9 @@ get_perturbation_effects.Seurat <- function(
 		term = test_terms,
 		family = family,
 		test = 't',
-		adjust_method = adjust_method
+		adjust_method = adjust_method,
+		verbose = verbose,
+		parallel = parallel
 	)
 
 	return(refit_de)
