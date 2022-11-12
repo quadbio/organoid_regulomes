@@ -18,3 +18,4 @@ The repo is structured as follows:
 * `utils/` contaions general utility functions
 	- `de.R` contains functions to perform differential expression and differential accessibility analysis
 	- `utils.R` has some other useful functions
+* `figures/` contains scripts to generate the plots from the figures
