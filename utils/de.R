@@ -4,6 +4,7 @@ require(sparseMatrixStats, quietly=T)
 require(glmnet, quietly=T)
 require(Seurat, quietly=T)
 require(lmtest, quietly=T)
+require(presto, quietly=T)
 
 
 #' @rdname glm_de
@@ -302,4 +303,22 @@ lr_de.default <- function(
         return(tibble(feature=feature, coef=coef, pval=pval))
     }
     return(bind_rows(test_list))
+}
+
+
+#### Wilcox DE ####
+de <- function(object, ...){
+    UseMethod(generic = 'de', object = object)
+}
+
+de.default <- function(object, groups){
+    de_df <- wilcoxauc(t(object), groups)
+    de_df <- dplyr::select(de_df, feature, group, 'avg_exp'=avgExpr, 'fc'=logFC, auc, pval, padj, 'prcex_self'=pct_in, 'prcex_other'=pct_out)
+    return(as_tibble(de_df))
+}
+
+de.Seurat <- function(object, groups, assay='RNA', slot='data'){
+    expr_mat <- t(GetAssayData(object, assay=assay, slot=slot))
+    groups <- object@meta.data[[groups]]
+    return(de(object=expr_mat, groups=groups))
 }
