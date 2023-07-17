@@ -5,6 +5,7 @@ The repo is structured as follows:
 * `integration/` contains scripts and functions used to integrate the RNA-seq and ATAC-seq data
 	- `get_bipartite_matches.py` finds matching cells given a h5ad file with a common embedding (in our case CCA) between the datasets.
 	- `matching.py` contains helper functions for the matching script
+* `trajectory/` contains scripts to infer the trajectory graph based on RNA velocity and cellrank
 * `pando/` contains scripts and functions used to infer the gene regulatory network
 	- `atac.R` contains functions to manipulate and plot ATAC-seq data
 	- `pseudocells.R` contains the functions to construct pseudocells as used in [Kanton et al. 2019](https://www.nature.com/articles/s41586-019-1654-9)
