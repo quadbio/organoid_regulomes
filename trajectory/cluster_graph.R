@@ -10,6 +10,23 @@ library(destiny)
 library(DDRTree)
 
 
+#### Functions ####
+knn <- function(dst, k){
+    k <- k+1
+    knn <- RANN::nn2(as.matrix(dst), k=k)
+    knn_tbl <- knn$nn.idx[, 2:k] %>% 
+        as_tibble(rownames='source') %>% 
+        pivot_longer(!source, names_to='id', values_to='idx') %>% 
+        inner_join(pivot_longer(as_tibble(knn$nn.dists, rownames='source'),
+                                !source, names_to='id', values_to='value')) %>% 
+        dplyr::select(source, idx, value) %>%
+        dplyr::mutate(target=rownames(as.matrix(dst))[as.numeric(.$idx)]) %>%
+        dplyr::mutate(source=rownames(as.matrix(dst))[as.numeric(.$source)]) %>%
+        dplyr::select(source, target, value)
+    return(knn_tbl)
+}
+
+
 #### Read stuff ####
 rnatac <- read_rds('data/RNA_ATAC/integration/RNA_ATAC_pseudocells_v2.1_srt.rds')
 # rnatac %>% write_rds('data/RNA_ATAC/integration/RNA_ATAC_pseudocells_v2.1_srt.rds')
