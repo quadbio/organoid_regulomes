@@ -691,7 +691,7 @@ deg_use <- telen_deg
 de_genes <- deg_use %>%
     pull(feature) %>% unique() %>% sort()
 
-spaths <- all_shortest_paths(module_graph, 'GLI3', 'SOX11', mode='out')$res
+spaths <- all_shortest_paths(module_graph, 'GLI3', de_genes, mode='out')$res
 spath_list <- map_par(spaths, function(p){
     edg <- names(p)
     edg_graph <- module_graph %>%
